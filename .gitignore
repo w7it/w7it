@@ -1,0 +1,12 @@
+node_modules/
+dist/
+tmp/
+
+.terraform/
+*.tfstate*
+
+.DS_Store/
+.vscode/
+.idea/
+
+.env
