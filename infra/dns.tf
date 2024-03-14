@@ -73,7 +73,7 @@ resource "cloudflare_record" "w7it_com_aaaa" {
 
 resource "cloudflare_record" "w7it_com_txt_spf" {
   zone_id = data.aws_route53_zone.w7it_com.id
-  name    = local.base_domain
+  name    = "@"
   type    = "TXT"
   ttl     = 300
   value   = "v=spf1 include:icloud.com ~all"
@@ -81,7 +81,7 @@ resource "cloudflare_record" "w7it_com_txt_spf" {
 
 resource "cloudflare_record" "w7it_com_txt_google" {
   zone_id = data.aws_route53_zone.w7it_com.id
-  name    = local.base_domain
+  name    = "@"
   type    = "TXT"
   ttl     = 300
   value   = "google-site-verification=G3yh9Oc7Y8XQaBuVf3AZgnJ2dQnHA6rtSLfKFMhyWKo"
@@ -89,7 +89,7 @@ resource "cloudflare_record" "w7it_com_txt_google" {
 
 resource "cloudflare_record" "w7it_com_txt_openai" {
   zone_id = data.aws_route53_zone.w7it_com.id
-  name    = local.base_domain
+  name    = "@"
   type    = "TXT"
   ttl     = 300
   value   = "openai-domain-verification=dv-Mmd41XJg5FnOIKfh5P9JSXBw"
