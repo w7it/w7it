@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePageContext } from 'vike-react/usePageContext';
-import { SHORT_SITE_NAME, SITE_NAME, SITE_URL } from '~/constants.js';
-import { getSetting } from '~/utils/getSetting.js';
+import { SHORT_SITE_NAME, SITE_NAME, SITE_URL } from '#constants';
+import { getSetting } from '#utils/getSetting.js';
 
 export function Head() {
     const pageContext = usePageContext();

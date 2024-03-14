@@ -1,6 +1,6 @@
-import { assert } from '~/utils/assert.js';
+import { assert } from '#utils/assert.js';
 import { RoadmapPersistor } from './RoadmapPersistor.js';
-import { LegendItem, RoadmapRepository } from './RoadmapRepository.js';
+import { type LegendItem, RoadmapRepository } from './RoadmapRepository.js';
 
 const WEEKS = 52;
 

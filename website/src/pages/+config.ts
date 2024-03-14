@@ -1,6 +1,6 @@
 import vikeReact from 'vike-react/config';
 import type { Config } from 'vike/types';
-import { SITE_NAME } from '../constants.js';
+import { SITE_NAME } from '#constants';
 
 export default {
     extends: vikeReact,

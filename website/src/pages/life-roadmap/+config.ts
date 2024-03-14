@@ -1,5 +1,5 @@
 import type { Config } from 'vike/types';
-import { SITE_NAME } from '../../constants.js';
+import { SITE_NAME } from '#constants';
 
 export default {
     title: `Дизайн жизни - ${SITE_NAME}`,

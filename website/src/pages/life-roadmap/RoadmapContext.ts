@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { assert } from '~/utils/assert.js';
+import { assert } from '#utils/assert.js';
 import type { RoadmapApi } from './RoadmapApi.js';
 
 const RoadmapContext = createContext<RoadmapApi | null>(null);

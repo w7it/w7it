@@ -1,5 +1,5 @@
 import * as lz from 'lzutf8';
-import { debounce } from '~/utils/debounce.js';
+import { debounce } from '#utils/debounce.js';
 import type { RoadmapRepository } from './RoadmapRepository.js';
 
 type DataTransferObject = {

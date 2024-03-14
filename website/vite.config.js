@@ -10,5 +10,4 @@ export default defineConfig({
     plugins: [react(), mdx(), ssr({ prerender: true })],
     build: { outDir: path.resolve(__dirname, 'dist'), emptyOutDir: true },
     server: { host: true, port: 8000 },
-    resolve: { alias: { '~/': `${path.resolve(__dirname, 'src')}/` } },
 });

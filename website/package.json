@@ -15,6 +15,13 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "fmt": "prettier --plugin-search-dir . --write ."
   },
+  "imports": {
+    "#*": [
+      "./src/*",
+      "./src/*.js",
+      "./src/*.mjs"
+    ]
+  },
   "devDependencies": {
     "@mdx-js/rollup": "^2.3.0",
     "@tailwindcss/typography": "^0.5.10",
@@ -47,7 +54,6 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-schemaorg": "^2.0.0",
-    "remixicon-react": "^1.0.0",
     "schema-dts": "^1.1.2",
     "vike-react": "^0.4.6"
   }

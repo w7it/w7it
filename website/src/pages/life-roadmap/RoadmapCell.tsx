@@ -1,4 +1,4 @@
-import React, { PointerEvent, useCallback, useEffect, useState } from 'react';
+import React, { type PointerEvent, useCallback, useEffect, useState } from 'react';
 import { clsx } from 'clsx';
 import { useRoadmapContext } from './RoadmapContext.js';
 import * as styles from './RoadmapCell.module.scss';

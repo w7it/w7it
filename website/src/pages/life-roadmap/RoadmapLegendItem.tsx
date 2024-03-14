@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import DeleteBin7LineIcon from 'remixicon-react/DeleteBin7LineIcon.js';
+import React, { type ChangeEvent, useCallback } from 'react';
+import { DeleteBin7LineIcon } from '#components/icons/DeleteBin7LineIcon.js';
 import { useRoadmapContext } from './RoadmapContext.js';
 
 type Props = {

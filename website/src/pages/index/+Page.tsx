@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '~/layout/Header.js';
+import { Header } from '#layout/Header.js';
 import { Hero } from './Hero.js';
 
 export const Page: React.FC = () => {

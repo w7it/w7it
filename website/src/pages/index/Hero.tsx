@@ -1,11 +1,11 @@
 import React from 'react';
-import TelegramFillIcon from 'remixicon-react/TelegramFillIcon.js';
-import InstagramFillIcon from 'remixicon-react/InstagramFillIcon.js';
-import LinkedinFillIcon from 'remixicon-react/LinkedinFillIcon.js';
-import { HeroImage } from '~/components/HeroImage.js';
+import { TelegramFillIcon } from '#components/icons/TelegramFillIcon.js';
+import { InstagramFillIcon } from '#components/icons/InstagramFillIcon.js';
+import { LinkedinFillIcon } from '#components/icons/LinkedinFillIcon.js';
+import { HeroImage } from '#components/HeroImage.js';
 import { SidekickIcon } from './SidekickIcon.js';
 import { HuntAssessmentIcon } from './HuntAssessmentIcon.js';
-import { TwitterXFillIcon } from './TwitterXFillIcon.js';
+import { TwitterXFillIcon } from '../../components/icons/TwitterXFillIcon.js';
 
 export const Hero: React.FC = () => {
     return (
@@ -119,6 +119,7 @@ function ExternalLink(props: ExternalLinkProps) {
             className="group flex text-center text-primary p-4 gap-2 rounded-lg border border-primary/25 items-center transition hover:bg-primary-light hover:text-white"
             href={href}
             target="_blank"
+            rel="noreferrer"
         >
             <div className="w-12 flex-0 flex justify-center">{icon}</div>
             <div className="text-start">

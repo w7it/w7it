@@ -1,6 +1,6 @@
 import type { PageContext } from 'vike/types';
-import { assert } from '~/utils/assert.js';
-import { isCallable } from '~/utils/isCallable.js';
+import { assert } from '#utils/assert.js';
+import { isCallable } from '#utils/isCallable.js';
 
 export function getSetting<T extends keyof PageContext['configEntries']>(
     pageContext: PageContext,
