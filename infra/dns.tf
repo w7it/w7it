@@ -72,7 +72,7 @@ resource "cloudflare_record" "w7it_com_aaaa" {
 }
 
 resource "cloudflare_record" "w7it_com_txt_spf" {
-  zone_id = data.aws_route53_zone.w7it_com.id
+  zone_id = cloudflare_zone.base.id
   name    = "@"
   type    = "TXT"
   ttl     = 300
@@ -80,7 +80,7 @@ resource "cloudflare_record" "w7it_com_txt_spf" {
 }
 
 resource "cloudflare_record" "w7it_com_txt_google" {
-  zone_id = data.aws_route53_zone.w7it_com.id
+  zone_id = cloudflare_zone.base.id
   name    = "@"
   type    = "TXT"
   ttl     = 300
@@ -88,7 +88,7 @@ resource "cloudflare_record" "w7it_com_txt_google" {
 }
 
 resource "cloudflare_record" "w7it_com_txt_openai" {
-  zone_id = data.aws_route53_zone.w7it_com.id
+  zone_id = cloudflare_zone.base.id
   name    = "@"
   type    = "TXT"
   ttl     = 300
