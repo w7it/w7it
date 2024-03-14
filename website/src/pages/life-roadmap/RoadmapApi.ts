@@ -1,6 +1,6 @@
-import { assert } from '#utils/assert.js';
-import { RoadmapPersistor } from './RoadmapPersistor.js';
-import { type LegendItem, RoadmapRepository } from './RoadmapRepository.js';
+import { assert } from "#utils/assert.js";
+import { RoadmapPersistor } from "./RoadmapPersistor.js";
+import { type LegendItem, RoadmapRepository } from "./RoadmapRepository.js";
 
 const WEEKS = 52;
 
@@ -19,7 +19,9 @@ export class RoadmapApi {
         const { dob } = this.repository.getState();
         if (!dob) return null;
 
-        const date = new Date(`${dob.slice(0, 4)}-${dob.slice(4, 6)}-${dob.slice(6, 8)}`);
+        const date = new Date(
+            `${dob.slice(0, 4)}-${dob.slice(4, 6)}-${dob.slice(6, 8)}`,
+        );
         return date;
     }
 
@@ -33,7 +35,7 @@ export class RoadmapApi {
             return;
         }
 
-        const yyyymmdd = value.toISOString().split('T')[0]?.replaceAll('-', '');
+        const yyyymmdd = value.toISOString().split("T")[0]?.replaceAll("-", "");
         this.repository.setState((state) => ({ ...state, dob: yyyymmdd }));
     }
 
@@ -42,20 +44,25 @@ export class RoadmapApi {
         if (legend) return legend;
 
         return [
-            { color: '#e1bc05', label: 'Учеба' },
-            { color: '#006d8f', label: 'Работа' },
-            { color: '#669c35', label: 'Отпуск' },
+            { color: "#e1bc05", label: "Учеба" },
+            { color: "#006d8f", label: "Работа" },
+            { color: "#669c35", label: "Отпуск" },
         ];
     }
 
-    public subscribeLegend(callback: (value: readonly LegendItem[]) => void): () => void {
+    public subscribeLegend(
+        callback: (value: readonly LegendItem[]) => void,
+    ): () => void {
         return this.subscribeChange(callback, () => this.getLegend());
     }
 
-    public updateLegendItem(index: number, updater: (item: LegendItem) => LegendItem): void {
+    public updateLegendItem(
+        index: number,
+        updater: (item: LegendItem) => LegendItem,
+    ): void {
         const legend = this.getLegend();
         const item = legend[index];
-        assert(item, 'Wrong index!');
+        assert(item, "Wrong index!");
 
         const updatedItem = updater(item);
         const newLegend = legend.slice();
@@ -67,7 +74,10 @@ export class RoadmapApi {
     public addLegendItem(item: LegendItem): void {
         const legend = this.getLegend();
         if (legend.length >= 36) return; // because of radix in `parseInt`
-        this.repository.setState((state) => ({ ...state, legend: [...legend, item] }));
+        this.repository.setState((state) => ({
+            ...state,
+            legend: [...legend, item],
+        }));
     }
 
     public removeLegendItem(index: number): void {
@@ -110,12 +120,15 @@ export class RoadmapApi {
             return acc;
         }, new Map<number, number>());
         const bestTuple = countByValues
-            ? Array.from(countByValues.entries()).reduce((acc, [value, count]) => {
-                  if (acc === null || count > acc[1]) {
-                      return [value, count] as const;
-                  }
-                  return acc;
-              }, null as readonly [number, number] | null)
+            ? Array.from(countByValues.entries()).reduce(
+                  (acc, [value, count]) => {
+                      if (acc === null || count > acc[1]) {
+                          return [value, count] as const;
+                      }
+                      return acc;
+                  },
+                  null as readonly [number, number] | null,
+              )
             : null;
 
         let newValue = bestTuple?.[0] ?? 0;
@@ -183,11 +196,17 @@ export class RoadmapApi {
         });
     }
 
-    public subscribeCellColor(id: number, callback: (color: string | null) => void): () => void {
+    public subscribeCellColor(
+        id: number,
+        callback: (color: string | null) => void,
+    ): () => void {
         return this.subscribeChange(callback, () => this.getCellColor(id));
     }
 
-    private subscribeChange<T>(callback: (value: T) => void, loader: () => T): () => void {
+    private subscribeChange<T>(
+        callback: (value: T) => void,
+        loader: () => T,
+    ): () => void {
         let prevState = loader();
         callback(prevState);
         return this.repository.onChange(() => {

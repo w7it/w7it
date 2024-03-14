@@ -1,8 +1,7 @@
-import React from 'react';
-import logotypeWebPicture from './logotype.webp';
-import logotypeWebPicture2x from './logotype@2x.webp';
-import logotypeImage from './logotype.jpg';
-import logotypeImage2x from './logotype@2x.jpg';
+import logotypeWebPicture from "./logotype.webp";
+import logotypeWebPicture2x from "./logotype@2x.webp";
+import logotypeImage from "./logotype.jpg";
+import logotypeImage2x from "./logotype@2x.jpg";
 
 type Props = { readonly fixed?: boolean };
 
@@ -28,7 +27,9 @@ export const Header: React.FC<Props> = () => {
 
                         <span className="flex flex-col">
                             <span className="text-lg leading-5">W7IT.com</span>
-                            <span className="text-sm text-gray-600 leading-5">Владислав Орлов</span>
+                            <span className="text-sm text-gray-600 leading-5">
+                                Владислав Орлов
+                            </span>
                         </span>
                     </a>
                 </div>
@@ -39,7 +40,8 @@ export const Header: React.FC<Props> = () => {
                         rel="noreferrer"
                         className="bg-primary text-white rounded py-2 px-3 font-bold hover:bg-primary/90"
                     >
-                        Связаться <span className="hidden sm:inline">со мной</span>
+                        Связаться{" "}
+                        <span className="hidden sm:inline">со мной</span>
                     </a>
                 </div>
             </div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Footer } from './Footer.js';
+import type React from "react";
+import { Footer } from "./Footer.js";
 
 type Props = {
     readonly children: React.ReactNode;

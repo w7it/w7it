@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export const useScrollPosition = (callback: () => void) => {
     useEffect(() => {
-        window.addEventListener('scroll', callback);
+        window.addEventListener("scroll", callback);
         callback();
-        return () => window.removeEventListener('scroll', callback);
+        return () => window.removeEventListener("scroll", callback);
     }, [callback]);
 };

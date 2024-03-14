@@ -1,7 +1,8 @@
-import React, { type PointerEvent, useCallback, useEffect, useState } from 'react';
-import { clsx } from 'clsx';
-import { useRoadmapContext } from './RoadmapContext.js';
-import * as styles from './RoadmapCell.module.scss';
+import type React from "react";
+import { type PointerEvent, useCallback, useEffect, useState } from "react";
+import { clsx } from "clsx";
+import { useRoadmapContext } from "./RoadmapContext.js";
+import * as styles from "./RoadmapCell.module.scss";
 
 type Props = {
     readonly id: number;
@@ -16,9 +17,9 @@ export const RoadmapCell: React.FC<Props> = (props) => {
     useEffect(() => {
         setColor(api.getCellColor(id));
         return api.subscribeCellColor(id, (color) => setColor(color));
-    }, []);
+    }, [api, id]);
 
-    const handleClick = useCallback(() => api.toggleCell(id), [id]);
+    const handleClick = useCallback(() => api.toggleCell(id), [api, id]);
 
     const handlePointerDown = useCallback(
         (event: PointerEvent<HTMLButtonElement>) => {
@@ -26,7 +27,7 @@ export const RoadmapCell: React.FC<Props> = (props) => {
             api.enableFillMode(id);
 
             const unsubscribe = () => {
-                window.removeEventListener('pointerup', handleUp, false);
+                window.removeEventListener("pointerup", handleUp, false);
             };
 
             const handleUp = () => {
@@ -34,31 +35,32 @@ export const RoadmapCell: React.FC<Props> = (props) => {
                 unsubscribe();
             };
 
-            window.addEventListener('pointerup', handleUp, false);
+            window.addEventListener("pointerup", handleUp, false);
 
             return unsubscribe;
         },
-        [id],
+        [api, id],
     );
 
     const handlePointerEnter = useCallback(() => {
         api.fillCell(id);
-    }, [id]);
+    }, [api, id]);
 
     return (
         <button
             className={clsx(
                 styles.cell,
-                'w-5 h-5 p-0.5 text-white border-none relative',
-                'before:absolute before:inset-px before:border before:border-black/25',
+                "w-5 h-5 p-0.5 text-white border-none relative",
+                "before:absolute before:inset-px before:border before:border-black/25",
                 {
-                    'opacity-60': isMuted,
+                    "opacity-60": isMuted,
                 },
             )}
+            type="button"
             style={{ color: color ?? undefined }}
             onClick={handleClick}
             onPointerDown={handlePointerDown}
             onPointerEnter={handlePointerEnter}
-        ></button>
+        />
     );
 };

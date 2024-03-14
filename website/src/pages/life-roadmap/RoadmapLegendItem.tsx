@@ -1,6 +1,7 @@
-import React, { type ChangeEvent, useCallback } from 'react';
-import { DeleteBin7LineIcon } from '#components/icons/DeleteBin7LineIcon.js';
-import { useRoadmapContext } from './RoadmapContext.js';
+import type React from "react";
+import { type ChangeEvent, useCallback } from "react";
+import { DeleteBin7LineIcon } from "#components/icons/DeleteBin7LineIcon.js";
+import { useRoadmapContext } from "./RoadmapContext.js";
 
 type Props = {
     readonly index: number;
@@ -12,17 +13,23 @@ export const RoadmapLegendItem: React.FC<Props> = (props) => {
     const { index, color, label } = props;
     const api = useRoadmapContext();
 
-    const handleColorChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.currentTarget.value;
-        api.updateLegendItem(index, (item) => ({ ...item, color: value }));
-    }, []);
-    const handleLabelChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.currentTarget.value;
-        api.updateLegendItem(index, (item) => ({ ...item, label: value }));
-    }, []);
+    const handleColorChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => {
+            const value = event.currentTarget.value;
+            api.updateLegendItem(index, (item) => ({ ...item, color: value }));
+        },
+        [api, index],
+    );
+    const handleLabelChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => {
+            const value = event.currentTarget.value;
+            api.updateLegendItem(index, (item) => ({ ...item, label: value }));
+        },
+        [api, index],
+    );
     const handleRemoveClicked = useCallback(() => {
         api.removeLegendItem(index);
-    }, []);
+    }, [api, index]);
 
     return (
         <div className="flex items-center mb-2 gap-2">
@@ -43,6 +50,7 @@ export const RoadmapLegendItem: React.FC<Props> = (props) => {
             />
             <button
                 className="border border-black/25 rounded-lg text-danger p-2"
+                type="button"
                 onClick={handleRemoveClicked}
             >
                 <DeleteBin7LineIcon />

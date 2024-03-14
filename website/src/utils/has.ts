@@ -11,4 +11,6 @@ export const has = <P extends PropertyKey>(
     property: P,
     onlyOwn = true,
 ): target is { readonly [K in P]: unknown } =>
-    onlyOwn ? Object.prototype.hasOwnProperty.call(target, property) : property in target;
+    onlyOwn
+        ? Object.prototype.hasOwnProperty.call(target, property)
+        : property in target;

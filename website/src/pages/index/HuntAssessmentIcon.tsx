@@ -1,23 +1,24 @@
-import React from 'react';
+import React from "react";
 
 type Props = {
     readonly className?: string;
-    readonly color?: string;
     readonly size?: number;
-    readonly children?: React.ReactNode;
 };
 
-export const HuntAssessmentIcon = React.memo(function HuntAssessmentIcon(props: Props) {
-    const { color = 'currentColor', size = 24, children, ...rest } = props;
+export const HuntAssessmentIcon = React.memo(function HuntAssessmentIcon(
+    props: Props,
+) {
+    const { size = 24, className } = props;
     return (
         <svg
-            {...rest}
+            className={className}
             width={size}
             height={size}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1024 1024"
             fill="none"
         >
+            <title>Хантассессмент.ру</title>
             <g clipPath="url(#a)">
                 <circle cx="512" cy="512" r="512" fill="#fff" />
                 <path

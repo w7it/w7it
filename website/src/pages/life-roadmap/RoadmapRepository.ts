@@ -28,6 +28,8 @@ export class RoadmapRepository {
 
     public setState(updater: (prevState: State) => State): void {
         this.state = updater(this.state);
-        this.subscribers.forEach((callback) => callback());
+        for (const callback of this.subscribers) {
+            callback();
+        }
     }
 }

@@ -1,11 +1,11 @@
-import React from 'react';
-import { TelegramFillIcon } from '#components/icons/TelegramFillIcon.js';
-import { InstagramFillIcon } from '#components/icons/InstagramFillIcon.js';
-import { LinkedinFillIcon } from '#components/icons/LinkedinFillIcon.js';
-import { HeroImage } from '#components/HeroImage.js';
-import { SidekickIcon } from './SidekickIcon.js';
-import { HuntAssessmentIcon } from './HuntAssessmentIcon.js';
-import { TwitterXFillIcon } from '../../components/icons/TwitterXFillIcon.js';
+import type React from "react";
+import { TelegramFillIcon } from "#components/icons/TelegramFillIcon.js";
+import { InstagramFillIcon } from "#components/icons/InstagramFillIcon.js";
+import { LinkedinFillIcon } from "#components/icons/LinkedinFillIcon.js";
+import { HeroImage } from "#components/HeroImage.js";
+import { SidekickIcon } from "./SidekickIcon.js";
+import { HuntAssessmentIcon } from "./HuntAssessmentIcon.js";
+import { TwitterXFillIcon } from "../../components/icons/TwitterXFillIcon.js";
 
 export const Hero: React.FC = () => {
     return (
@@ -19,19 +19,23 @@ export const Hero: React.FC = () => {
                     <div>
                         <h1 className="font-display text-3xl">Приветствую!</h1>
                         <p className="text-xl mt-2">
-                            Меня зовут Влад, я айтишник со стажем. Здесь вы можете узнать больше обо
-                            мне и моих проектах.
+                            Меня зовут Влад, я айтишник со стажем. Здесь вы
+                            можете узнать больше обо мне и моих проектах.
                         </p>
 
-                        <h2 className="font-display text-3xl mt-8">Коротко обо мне</h2>
+                        <h2 className="font-display text-3xl mt-8">
+                            Коротко обо мне
+                        </h2>
                         <ul className="mt-2 text-xl list-disc ms-8">
                             <li>
-                                За плечами 10+ лет опыта в качестве full-stack разработчика в разных
-                                командах и компаниях
+                                За плечами 10+ лет опыта в качестве full-stack
+                                разработчика в разных командах и компаниях
                             </li>
-                            <li>Понимаю как создавать продукты и их продавать</li>
                             <li>
-                                Пишу мысли о стартапах/бизнесах в{' '}
+                                Понимаю как создавать продукты и их продавать
+                            </li>
+                            <li>
+                                Пишу мысли о стартапах/бизнесах в{" "}
                                 <a
                                     href="https://t.me/+6SmymYLA1b1jOTZi"
                                     className="text-primary underline"
@@ -51,8 +55,8 @@ export const Hero: React.FC = () => {
 
                 <h2 className="font-display text-3xl mt-8">Мои проекты</h2>
                 <p className="text-xl mt-2">
-                    Я начинал и участвовал во многих проектах. Ниже проекты, которым я уделяю свое
-                    внимание и время в данный момент:
+                    Я начинал и участвовал во многих проектах. Ниже проекты,
+                    которым я уделяю свое внимание и время в данный момент:
                 </p>
                 <div className="grid md:grid-cols-2 mt-4 gap-4">
                     <ExternalLink
@@ -71,7 +75,8 @@ export const Hero: React.FC = () => {
 
                 <h2 className="font-display text-3xl mt-8">Где меня найти</h2>
                 <p className="text-xl mt-2">
-                    Я публично доступен в нескольких социальных сетях, которые лично сам и веду.
+                    Я публично доступен в нескольких социальных сетях, которые
+                    лично сам и веду.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 mt-4">

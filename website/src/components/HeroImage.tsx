@@ -1,6 +1,6 @@
-import React from 'react';
-import meWebPicture from './me.webp';
-import meImage from './me.png';
+import type React from "react";
+import meWebPicture from "./me.webp";
+import meImage from "./me.png";
 
 export const HeroImage: React.FC = () => {
     return (
@@ -14,11 +14,18 @@ export const HeroImage: React.FC = () => {
             <figure>
                 <picture>
                     <source srcSet={meWebPicture} type="image/webp" />
-                    <img src={meImage} width="448" height="640" alt="Влад Орлов" />
+                    <img
+                        src={meImage}
+                        width="448"
+                        height="640"
+                        alt="Влад Орлов"
+                    />
                 </picture>
 
                 <figcaption className="bg-primary/60 text-white px-6 py-4 rounded-lg absolute right-0 bottom-16">
-                    <strong className="font-display font-extrabold text-lg">Влад Орлов</strong>
+                    <strong className="font-display font-extrabold text-lg">
+                        Влад Орлов
+                    </strong>
                     <div>Более 10 лет в IT-разработке</div>
                 </figcaption>
             </figure>

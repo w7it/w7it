@@ -5,7 +5,7 @@
 export class AssertionError extends Error {
     constructor(message: string) {
         super(message);
-        this.name = 'AssertionError';
+        this.name = "AssertionError";
     }
 }
 
@@ -14,7 +14,10 @@ export class AssertionError extends Error {
  * @param value - The input that is checked for being truthy
  * @param message - Message of error if assertion will be failed
  */
-export function assert(value: unknown, message = 'Assertion failed'): asserts value {
+export function assert(
+    value: unknown,
+    message = "Assertion failed",
+): asserts value {
     if (value) return;
     throw new AssertionError(message);
 }

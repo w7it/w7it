@@ -1,17 +1,16 @@
 {
   "private": true,
   "type": "module",
-  "workspaces": [
-    "./website"
-  ],
+  "workspaces": ["./website"],
   "scripts": {
     "start": "npm run start --workspaces",
     "build": "npm run build --workspaces --if-present",
     "test": "vitest",
-    "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "fmt": "prettier --plugin-search-dir . --write ."
+    "lint": "biome lint .",
+    "fmt": "biome format --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.6.1",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "@w7it/prettier-config": "^0.1.1",

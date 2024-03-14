@@ -16,11 +16,7 @@
     "fmt": "prettier --plugin-search-dir . --write ."
   },
   "imports": {
-    "#*": [
-      "./src/*",
-      "./src/*.js",
-      "./src/*.mjs"
-    ]
+    "#*": ["./src/*", "./src/*.js", "./src/*.mjs"]
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.3.0",

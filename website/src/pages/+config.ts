@@ -1,10 +1,10 @@
-import vikeReact from 'vike-react/config';
-import type { Config } from 'vike/types';
-import { SITE_NAME } from '#constants';
+import vikeReact from "vike-react/config";
+import type { Config } from "vike/types";
+import { SITE_NAME } from "#constants";
 
 export default {
     extends: vikeReact,
-    lang: 'ru',
+    lang: "ru",
     title: SITE_NAME,
     meta: {
         description: { env: { server: true, client: true } },
