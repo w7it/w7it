@@ -5,3 +5,7 @@ terraform {
     region = "us-east-1"
   }
 }
+
+locals {
+  base_domain = "w7it.com"
+}
