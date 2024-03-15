@@ -77,7 +77,7 @@ resource "cloudflare_record" "w7it_com_txt_spf" {
   name    = "@"
   type    = "TXT"
   ttl     = 300
-  value   = "v=spf1 include:icloud.com ~all"
+  value   = "v=spf1 include:_spf.google.com ~all"
 }
 
 resource "cloudflare_record" "w7it_com_txt_google" {
@@ -106,10 +106,18 @@ resource "cloudflare_record" "www_w7it_com_cname" {
 
 resource "cloudflare_record" "dkim_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
-  name     = "sig1._domainkey.${local.base_domain}"
-  type     = "CNAME"
+  name     = "google._domainkey"
+  type     = "TXT"
   ttl      = 300
-  value    = "sig1.dkim.w7it.com.at.icloudmailadmin.com."
+  value    = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApVem0kCZ0nggFbRK++6Au7rtFV6DC0mjmkgip+bSAISEYIkPn2epI7PbtTKOXoSKrcqyS8onF0xiYTk45KnxFbB5icNqWGgbH/BzzTve+qiH9SL+u5Za4cvQ52w6FLKEk7tol2UvyDY/WTIFadb46QIAwDJ5rKp0zro0ulLxIsPPSB9mA0wRAOJmRUpw0Ogz4hSP0cFuulD197/pf98izXyji9LYCSN/pYnzdlY8pBF0vhXSSVgZTNkIbn8a+L++bFa2wODQUVSXTCs0G5unS3kMoAmahcvaQHA4nGKunQixKgkblE3Nx0GG8d469oUHXm7tL1d4eCyo5XFsvsQtiwIDAQAB"
+}
+
+resource "cloudflare_record" "dmarc_w7it_com_txt" {
+  zone_id = cloudflare_zone.base.id
+  name    = "_dmarc"
+  type    = "TXT"
+  ttl     = 300
+  value   = "v=DMARC1; p=none; rua=mailto:40a6ff871ec245a78faba3f3e1354cb5@dmarc-reports.cloudflare.net;"
 }
 
 resource "cloudflare_record" "w7it_com_caa_issue" {
