@@ -1,4 +1,5 @@
 locals {
+  old_base_domain = "orlov-vo.ru"
   github_pages_ipv4_addresses = [
     "185.199.108.153",
     "185.199.109.153",
@@ -143,4 +144,66 @@ resource "cloudflare_record" "w7it_com_caa_issuewild" {
     tag   = "issuewild"
     value = each.value
   }
+}
+
+resource "cloudflare_zone" "old" {
+  account_id = cloudflare_account.default.id
+  zone       = local.old_base_domain
+}
+
+resource "cloudflare_record" "orlov-vo_ru_mx" {
+  zone_id  = cloudflare_zone.old.id
+  name     = "@"
+  type     = "MX"
+  ttl      = 3600
+  priority = 10
+  value    = "mx.yandex.net"
+}
+
+resource "cloudflare_record" "orlov-vo_ru_a" {
+  for_each = {
+    for value in local.github_pages_ipv4_addresses : value => value
+  }
+
+  zone_id  = cloudflare_zone.old.id
+  name     = "@"
+  type     = "A"
+  ttl      = 300
+  value    = each.value
+}
+
+resource "cloudflare_record" "orlov-vo_ru_aaaa" {
+  for_each = {
+    for value in local.github_pages_ipv6_addresses : value => value
+  }
+
+  zone_id  = cloudflare_zone.old.id
+  name     = "@"
+  type     = "AAAA"
+  ttl      = 300
+  value    = each.value
+}
+
+resource "cloudflare_record" "orlov-vo_ru_cname" {
+  zone_id  = cloudflare_zone.old.id
+  name     = "www"
+  type     = "CNAME"
+  ttl      = 300
+  value    = local.old_base_domain
+}
+
+resource "cloudflare_record" "orlov-vo_ru_txt_spf" {
+  zone_id = cloudflare_zone.old.id
+  name    = "@"
+  type    = "TXT"
+  ttl     = 300
+  value   = "v=spf1 redirect=_spf.yandex.net"
+}
+
+resource "cloudflare_record" "mail__domainkey_orlov-vo_ru_txt" {
+  zone_id = cloudflare_zone.old.id
+  name    = "mail._domainkey"
+  type    = "TXT"
+  ttl     = 300
+  value   = "v=DKIM1; k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J3jR0WgdYOPXmy7sF9V0AOCyJWBVByM0InbSHYwQDC7U9sKy9E/h7P9ykGXY+24povlmMGTALA2H2rPjqq6QjurZLdSkAcHfKn4zDztVvG+pK70xxD0cV5XH++3HYq0a5z04zJRTgRKs41uay2c+QHPG/CvNHtTufLXfWu+OrwIDAQAB"
 }
