@@ -31,3 +31,6 @@ output "neon_project" {
 output "cloudflare_account_id" {
   value = cloudflare_account.default.id
 }
+output "cloudflare_zone_id" {
+  value = cloudflare_zone.base.id
+}
