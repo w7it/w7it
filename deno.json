@@ -1,0 +1,19 @@
+{
+  "tasks": {
+    "tg:bot:start": "deno run --lock --cached-only --allow-env --allow-sys --allow-ffi --allow-net --allow-read tgbot/src/main.ts",
+    "fmt": "deno run -A npm:@biomejs/biome format --write .",
+    "lint": "deno run -A npm:@biomejs/biome lint .",
+    "update-lock": "deno cache --lock --lock-write tgbot/src/main.ts"
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.217.0/",
+    "fluent": "https://deno.land/x/better_fluent@v1.0.0/mod.ts",
+    "@grammyjs/conversations": "https://deno.land/x/grammy_conversations@v1.2.0/mod.ts",
+    "grammy": "https://deno.land/x/grammy@v1.21.1/mod.ts",
+    "ws": "https://deno.land/x/websocket@v0.1.4/mod.ts",
+
+    "https://deno.land/x/grammy_types@v3.1.1": "https://deno.land/x/grammy_types@v3.5.2",
+    "https://deno.land/x/grammy@v1.16.0": "https://deno.land/x/grammy@v1.21.1",
+    "https://lib.deno.dev/x/grammy@v1": "https://deno.land/x/grammy@v1.21.1"
+  }
+}

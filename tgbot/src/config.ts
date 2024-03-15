@@ -1,0 +1,8 @@
+import { load } from "std/dotenv/mod.ts";
+
+const env = await load();
+
+const str = (name: string): string => env[name] ?? Deno.env.get(name) ?? "";
+// const num = (name: string): number => Number.parseInt(str(name), 10);
+
+export const TELEGRAM_BOT_TOKEN = str("TELEGRAM_BOT_TOKEN");
