@@ -96,6 +96,14 @@ resource "cloudflare_record" "w7it_com_txt_openai" {
   value   = "openai-domain-verification=dv-Mmd41XJg5FnOIKfh5P9JSXBw"
 }
 
+resource "cloudflare_record" "github_w7it_com_txt" {
+  zone_id = cloudflare_zone.base.id
+  name    = "_github-pages-challenge-w7it"
+  type    = "TXT"
+  ttl     = 300
+  value   = "f41419fcc9cfb92c5aee9c0ec1be35"
+}
+
 resource "cloudflare_record" "www_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
   name     = "www"
