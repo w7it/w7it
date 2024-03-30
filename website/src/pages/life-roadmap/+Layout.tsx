@@ -1,1 +1,1 @@
-export { LightLayout as Layout } from "#layout/LightLayout.js";
+export { TinyLayout as Layout } from "#layout/TinyLayout.js";
