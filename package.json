@@ -1,7 +1,7 @@
 {
   "private": true,
   "type": "module",
-  "workspaces": ["./website"],
+  "workspaces": ["./ai", "./website"],
   "scripts": {
     "start": "npm run start --workspaces",
     "build": "npm run build --workspaces --if-present",
