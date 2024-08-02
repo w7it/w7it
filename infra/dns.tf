@@ -112,24 +112,6 @@ resource "cloudflare_record" "www_w7it_com_cname" {
   value    = local.base_domain
 }
 
-resource "cloudflare_record" "ai_w7it_com_a" {
-  zone_id = cloudflare_zone.base.id
-  name    = "ai"
-  type    = "A"
-  value   = "188.245.36.128"
-  proxied = false
-  ttl     = 300
-}
-
-resource "cloudflare_record" "ai_w7it_com_aaaa" {
-  zone_id = cloudflare_zone.base.id
-  name    = "ai"
-  type    = "AAAA"
-  value   = "2a01:4f8:1c1e:8ae7::"
-  proxied = false
-  ttl     = 300
-}
-
 resource "cloudflare_record" "dkim_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
   name     = "google._domainkey"
