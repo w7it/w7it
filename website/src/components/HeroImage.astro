@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/hero.png";
+---
+
+<div
+    class="relative max-w-md mx-auto
+        before:absolute before:bg-primary/30 before:rounded-full before:w-80 before:h-80 before:-z-10 before:top-8 before:left-48
+        after:absolute after:bg-alt/10 after:rounded-full after:w-52 after:h-52 after:-z-10 after:top-32 after:right-64"
+>
+    <figure>
+        <Image
+            src={heroImage}
+            densities={[1, 2]}
+            formats={["webp", "png"]}
+            width={448}
+            height={640}
+            alt="Влад Орлов"
+        />
+
+        <figcaption
+            class="bg-primary/60 text-white px-6 py-4 rounded-lg absolute right-0 bottom-16"
+        >
+            <strong class="font-display font-extrabold text-lg">
+                Влад Орлов
+            </strong>
+            <div>Более 10 лет в IT-разработке</div>
+        </figcaption>
+    </figure>
+</div>

@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import EmptyLayout from "../layout/EmptyLayout.astro";
+import logotype from "../assets/logotype.jpg";
+---
+
+<EmptyLayout>
+    <div
+        class="container mx-auto max-w-5xl min-h-screen flex flex-col justify-center items-center font-body bg-white text-gray-800"
+    >
+        <a href="/">
+            <Image
+                src={logotype}
+                densities={[1, 2]}
+                formats={["webp", "jpg"]}
+                class="mx-auto mb-8 w-28 h-28 rounded-full md:w-40 md:h-40"
+                alt="Logotype"
+                width="160"
+            />
+        </a>
+        <h1 class="text-3xl md:text-5xl font-black font-display">
+            404. Страница не найдена
+        </h1>
+        <p class="md:text-xl py-4 mb-4">Запрошенная страница не существует</p>
+    </div>
+</EmptyLayout>

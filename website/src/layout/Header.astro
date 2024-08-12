@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import logotype from "../assets/logotype.jpg";
+---
+
+<nav>
+    <div class="container py-4 px-8 mx-auto flex justify-between">
+        <div class="">
+            <a class="inline-flex items-center" href="/">
+                <Image
+                    class="rounded-full w-8 h-8 mr-2 overflow-hidden"
+                    src={logotype}
+                    quality="high"
+                    formats={["webp", "jpg"]}
+                    densities={[1, 2]}
+                    alt="Logo"
+                    width={logotype.width / 2}
+                />
+
+                <span class="flex flex-col">
+                    <span class="text-lg leading-5">Влад Орлов</span>
+                    <span class="text-sm text-gray-600 leading-5">
+                        W7IT.com
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="">
+            <a
+                href="https://t.me/w7it_bot"
+                target="_blank"
+                rel="noreferrer"
+                class="bg-primary text-white rounded py-2 px-3 font-bold hover:bg-primary/90"
+            >
+                Связаться{" "}
+                <span class="hidden sm:inline">со мной</span>
+            </a>
+        </div>
+    </div>
+</nav>

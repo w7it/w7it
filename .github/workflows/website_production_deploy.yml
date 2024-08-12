@@ -36,7 +36,7 @@ jobs:
       - name: 🌈 Upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./website/dist/client
+          path: ./website/dist
 
   deploy:
     needs: build

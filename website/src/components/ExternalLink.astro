@@ -1,0 +1,26 @@
+---
+const { href, title, description } = Astro.props;
+---
+
+<a
+    class="group flex text-center text-primary p-4 gap-2 rounded-lg border border-primary/25 items-center transition hover:bg-primary-light hover:text-white"
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+>
+    <div class="w-12 flex-0 flex justify-center"><slot name="icon" /></div>
+    <div class="text-start">
+        <div
+            class="text-lg leading-6 text-gray-800 font-bold transition group-hover:text-white"
+        >
+            {title}
+        </div>
+        {
+            description && (
+                <div class="text-md text-gray-600 transition group-hover:text-gray-200/80">
+                    {description}
+                </div>
+            )
+        }
+    </div>
+</a>

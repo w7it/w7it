@@ -1,0 +1,85 @@
+---
+import { getImage } from "astro:assets";
+import { Schema } from "astro-seo-schema";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "../constants.ts";
+import logotype from "../assets/logotype.jpg";
+import "./fonts.css";
+
+const title = SITE_TITLE;
+const baseUrl = Astro.site || Astro.url;
+const description = SITE_DESCRIPTION;
+const image = "/preview.jpg";
+
+const appleTouchIcon = await getImage({ src: logotype, width: 180 });
+const faviconPng = await getImage({ src: logotype, width: 32, format: "png" });
+---
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="theme-color" content="#1f2937" />
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content={new URL(Astro.url.pathname, baseUrl)}
+        />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, baseUrl)} />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:locale" content="ru_RU" />
+
+        <meta name="twitter:site" content={SITE_NAME} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content={new URL("/", baseUrl)} />
+        <meta name="twitter:domain" content={new URL("/", baseUrl)} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image:src" content={new URL(image, baseUrl)} />
+
+        <link rel="icon" href={faviconPng.src} type="image/png" />
+        <link rel="apple-touch-icon" href={appleTouchIcon.src} />
+        <link rel="manifest" href="/webmanifest.json" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+
+        <title>{title}</title>
+
+        <Schema
+            item={{
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "@id": baseUrl.toString(),
+                name: title || SITE_NAME,
+                description,
+                inLanguage: "ru-RU",
+                url: baseUrl.toString(),
+                isPartOf: { "@id": `${baseUrl.origin}#website` },
+                potentialAction: [
+                    {
+                        "@type": "ReadAction",
+                        target: baseUrl.toString(),
+                    },
+                ],
+            }}
+        />
+        <Schema
+            item={{
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": `${baseUrl.origin}#website`,
+                url: baseUrl.origin,
+                name: SITE_NAME,
+                description: "Оценка технических навыков IT-разработчиков",
+                inLanguage: "ru-RU",
+                publisher: { "@id": `${baseUrl.origin}#author` },
+            }}
+        />
+    </head>
+    <body class="flex flex-col min-h-screen">
+        <slot />
+    </body>
+</html>

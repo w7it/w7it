@@ -1,20 +1,10 @@
 {
+  "workspace": ["./tgbot", "./website"],
   "tasks": {
-    "tg:bot:start": "deno run --lock --cached-only --allow-env --allow-sys --allow-ffi --allow-net --allow-read tgbot/src/main.ts",
+    "dev": "cd tgbot && deno task dev & cd website && npm start",
+    "cache": "cd tgbot && deno task cache",
     "fmt": "deno run -A npm:@biomejs/biome format --write .",
-    "lint": "deno run -A npm:@biomejs/biome lint .",
-    "update-lock": "deno cache --lock --lock-write tgbot/src/main.ts"
+    "lint": "deno run -A npm:@biomejs/biome lint ."
   },
-  "imports": {
-    "std/": "https://deno.land/std@0.217.0/",
-    "fluent": "https://deno.land/x/better_fluent@v1.0.0/mod.ts",
-    "@grammyjs/conversations": "https://deno.land/x/grammy_conversations@v1.2.0/mod.ts",
-    "@grammyjs/fluent": "npm:@grammyjs/fluent",
-    "grammy": "https://deno.land/x/grammy@v1.21.1/mod.ts",
-    "ws": "https://deno.land/x/websocket@v0.1.4/mod.ts",
-
-    "https://deno.land/x/grammy_types@v3.1.1": "https://deno.land/x/grammy_types@v3.5.2",
-    "https://deno.land/x/grammy@v1.16.0": "https://deno.land/x/grammy@v1.21.1",
-    "https://lib.deno.dev/x/grammy@v1": "https://deno.land/x/grammy@v1.21.1"
-  }
+  "lock": true
 }

@@ -1,4 +1,4 @@
-import { load } from "std/dotenv/mod.ts";
+import { load } from "@std/dotenv";
 
 const env = await load();
 

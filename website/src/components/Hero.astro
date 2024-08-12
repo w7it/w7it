@@ -1,0 +1,106 @@
+---
+import { Icon } from "astro-icon/components";
+import HeroImage from "./HeroImage.astro";
+import ExternalLink from "./ExternalLink.astro";
+---
+
+<div class="overflow-x-hidden">
+    <div class="container mx-auto p-8">
+        <div class="grid gap-x-4 gap-y-16 lg:grid-cols-2 items-center">
+            <div class="lg:order-last">
+                <HeroImage />
+            </div>
+
+            <div>
+                <h1 class="font-display text-3xl">Приветствую!</h1>
+                <p class="text-xl mt-2">
+                    Меня зовут Влад, я айтишник со стажем. Здесь вы можете
+                    узнать больше обо мне и моих проектах.
+                </p>
+
+                <h2 class="font-display text-3xl mt-8">Коротко обо мне</h2>
+                <ul class="mt-2 text-xl list-disc ms-8">
+                    <li>
+                        За плечами 10+ лет опыта в качестве full-stack
+                        разработчика в разных командах и компаниях
+                    </li>
+                    <li>Понимаю как создавать продукты и их продавать</li>
+                    <li>
+                        Пишу мысли о стартапах/бизнесах в{" "}
+                        <a
+                            href="https://t.me/+6SmymYLA1b1jOTZi"
+                            class="text-primary underline"
+                        >
+                            свой блог
+                        </a>
+                    </li>
+                </ul>
+                <a
+                    class="block text-center text-gray-800 px-8 py-4 rounded-lg border border-primary/25 transition hover:bg-primary-light hover:text-white font-bold mt-4 text-lg"
+                    href="/about"
+                >
+                    Читать другие 100 фактов обо мне
+                </a>
+            </div>
+        </div>
+
+        <h2 class="font-display text-3xl mt-8">Мои проекты</h2>
+        <p class="text-xl mt-2">
+            Я начинал и участвовал во многих проектах. Ниже проекты, которым я
+            уделяю свое внимание и время в данный момент:
+        </p>
+        <div class="grid md:grid-cols-2 mt-4 gap-4">
+            <ExternalLink
+                href="https://meetsidekick.com/?utm_source=w7it"
+                title="Sidekick Browser"
+                description="Браузер для продуктивных людей"
+            >
+                <Icon slot="icon" name="sidekick" size={48} />
+            </ExternalLink>
+            <ExternalLink
+                href="https://huntassessment.ru/?utm_source=w7it"
+                title="ХантАссессмент.ру"
+                description="Uber для ассессмента IT-специалистов"
+            >
+                <Icon slot="icon" name="huntassessment" size={32} />
+            </ExternalLink>
+        </div>
+
+        <h2 class="font-display text-3xl mt-8">Где меня найти</h2>
+        <p class="text-xl mt-2">
+            Я публично доступен в нескольких социальных сетях, которые лично сам
+            и веду.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <ExternalLink
+                href="https://t.me/+6SmymYLA1b1jOTZi"
+                title="Telegram"
+                description="Канал куда я выгружаю умные мысли"
+            >
+                <Icon slot="icon" name="telegram-fill" size={32} />
+            </ExternalLink>
+            <ExternalLink
+                href="https://instagram.com/orlov_vo"
+                title="Instagram"
+                description="Фоточки и сториз из моей жизни"
+            >
+                <Icon slot="icon" name="instagram-fill" size={32} />
+            </ExternalLink>
+            <ExternalLink
+                href="https://linkedin.com/in/w7it"
+                title="LinkedIn"
+                description="Мой рабочий профиль"
+            >
+                <Icon slot="icon" name="linkedin-box-fill" size={32} />
+            </ExternalLink>
+            <ExternalLink
+                href="https://x.com/w7itcom"
+                title="X.com (ex. Twitter)"
+                description="Тут просто шитпостинг"
+            >
+                <Icon slot="icon" name="twitter-x-fill" size={32} />
+            </ExternalLink>
+        </div>
+    </div>
+</div>
