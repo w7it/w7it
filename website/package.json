@@ -26,5 +26,8 @@
     "astro-icon": {
       "@iconify/tools": "^4.0.5"
     }
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.20.0"
   }
 }
