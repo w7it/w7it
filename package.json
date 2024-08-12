@@ -1,0 +1,5 @@
+{
+  "name": "w7it",
+  "private": true,
+  "workspaces": ["./website"]
+}
