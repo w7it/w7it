@@ -112,6 +112,14 @@ resource "cloudflare_record" "www_w7it_com_cname" {
   value    = local.base_domain
 }
 
+resource "cloudflare_record" "trader_w7it_com_a" {
+  zone_id  = cloudflare_zone.base.id
+  name     = "trader"
+  type     = "A"
+  ttl      = 300
+  value    = "188.245.36.128"
+}
+
 resource "cloudflare_record" "dkim_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
   name     = "google._domainkey"
