@@ -120,6 +120,14 @@ resource "cloudflare_record" "trader_w7it_com_a" {
   value    = "188.245.36.128"
 }
 
+resource "cloudflare_record" "n8n_w7it_com_a" {
+  zone_id  = cloudflare_zone.base.id
+  name     = "n8n"
+  type     = "A"
+  ttl      = 300
+  value    = "188.245.36.128"
+}
+
 resource "cloudflare_record" "dkim_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
   name     = "google._domainkey"
