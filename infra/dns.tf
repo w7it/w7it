@@ -144,6 +144,14 @@ resource "cloudflare_record" "memory_w7it_com_a" {
   value    = "188.245.36.128"
 }
 
+resource "cloudflare_record" "swarm_w7it_com_a" {
+  zone_id  = cloudflare_zone.base.id
+  name     = "swarm"
+  type     = "A"
+  ttl      = 300
+  value    = "188.245.36.128"
+}
+
 resource "cloudflare_record" "dkim_w7it_com_cname" {
   zone_id  = cloudflare_zone.base.id
   name     = "google._domainkey"
