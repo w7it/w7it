@@ -144,9 +144,9 @@ resource "cloudflare_record" "memory_w7it_com_a" {
   value    = "188.245.36.128"
 }
 
-resource "cloudflare_record" "swarm_w7it_com_a" {
+resource "cloudflare_record" "zergcode_w7it_com_a" {
   zone_id  = cloudflare_zone.base.id
-  name     = "swarm"
+  name     = "zergcode"
   type     = "A"
   ttl      = 300
   value    = "188.245.36.128"
