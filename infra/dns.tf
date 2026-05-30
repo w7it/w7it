@@ -38,6 +38,12 @@ locals {
     "route2.mx.cloudflare.net" = 35
     "route3.mx.cloudflare.net" = 88
   }
+
+  cloudflare_email_routing_mx_old = {
+    "route1.mx.cloudflare.net" = 67
+    "route2.mx.cloudflare.net" = 41
+    "route3.mx.cloudflare.net" = 48
+  }
 }
 
 resource "cloudflare_zone" "base" {
@@ -209,12 +215,14 @@ resource "cloudflare_zone" "old" {
 }
 
 resource "cloudflare_record" "orlov-vo_ru_mx" {
+  for_each = local.cloudflare_email_routing_mx_old
+
   zone_id  = cloudflare_zone.old.id
   name     = "@"
   type     = "MX"
   ttl      = 3600
-  priority = 10
-  value    = "mx.yandex.net"
+  priority = each.value
+  value    = each.key
 }
 
 resource "cloudflare_record" "orlov-vo_ru_a" {
@@ -254,13 +262,13 @@ resource "cloudflare_record" "orlov-vo_ru_txt_spf" {
   name    = "@"
   type    = "TXT"
   ttl     = 300
-  value   = "v=spf1 redirect=_spf.yandex.net"
+  value   = "v=spf1 include:_spf.mx.cloudflare.net ~all"
 }
 
-resource "cloudflare_record" "mail__domainkey_orlov-vo_ru_txt" {
+resource "cloudflare_record" "dkim_orlov-vo_ru_txt" {
   zone_id = cloudflare_zone.old.id
-  name    = "mail._domainkey"
+  name    = "cf2024-1._domainkey"
   type    = "TXT"
   ttl     = 300
-  value   = "v=DKIM1; k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7J3jR0WgdYOPXmy7sF9V0AOCyJWBVByM0InbSHYwQDC7U9sKy9E/h7P9ykGXY+24povlmMGTALA2H2rPjqq6QjurZLdSkAcHfKn4zDztVvG+pK70xxD0cV5XH++3HYq0a5z04zJRTgRKs41uay2c+QHPG/CvNHtTufLXfWu+OrwIDAQAB"
+  value   = "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiweykoi+o48IOGuP7GR3X0MOExCUDY/BCRHoWBnh3rChl7WhdyCxW3jgq1daEjPPqoi7sJvdg5hEQVsgVRQP4DcnQDVjGMbASQtrY4WmB1VebF+RPJB2ECPsEDTpeiI5ZyUAwJaVX7r6bznU67g7LvFq35yIo4sdlmtZGV+i0H4cpYH9+3JJ78km4KXwaf9xUJCWF6nxeD+qG6Fyruw1Qlbds2r85U9dkNDVAS3gioCvELryh1TxKGiVTkg4wqHTyHfWsp7KD3WQHYJn0RyfJJu6YEmL77zonn7p2SRMvTMP3ZEXibnC9gz3nnhR6wcYL8Q7zXypKTMD58bTixDSJwIDAQAB"
 }
