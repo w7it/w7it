@@ -33,33 +33,12 @@ locals {
     "amazonaws.com",
   ]
 
-  cloudflare_email_routing_mx = {
-    "route1.mx.cloudflare.net" = 55
-    "route2.mx.cloudflare.net" = 35
-    "route3.mx.cloudflare.net" = 88
-  }
 
-  cloudflare_email_routing_mx_old = {
-    "route1.mx.cloudflare.net" = 67
-    "route2.mx.cloudflare.net" = 41
-    "route3.mx.cloudflare.net" = 48
-  }
 }
 
 resource "cloudflare_zone" "base" {
   account_id = cloudflare_account.default.id
   zone       = local.base_domain
-}
-
-resource "cloudflare_record" "w7it_com_mx" {
-  for_each = local.cloudflare_email_routing_mx
-
-  zone_id  = cloudflare_zone.base.id
-  name     = "@"
-  type     = "MX"
-  ttl      = 3600
-  priority = each.value
-  value    = each.key
 }
 
 resource "cloudflare_record" "w7it_com_a" {
@@ -85,15 +64,6 @@ resource "cloudflare_record" "w7it_com_aaaa" {
   ttl      = 300
   value    = each.value
 }
-
-resource "cloudflare_record" "w7it_com_txt_spf" {
-  zone_id = cloudflare_zone.base.id
-  name    = "@"
-  type    = "TXT"
-  ttl     = 300
-  value   = "v=spf1 include:_spf.mx.cloudflare.net ~all"
-}
-
 
 resource "cloudflare_record" "w7it_com_txt_openai" {
   zone_id = cloudflare_zone.base.id
@@ -159,14 +129,6 @@ resource "cloudflare_record" "zergcode_w7it_com_a" {
   value    = "188.245.36.128"
 }
 
-resource "cloudflare_record" "dkim_w7it_com_txt" {
-  zone_id = cloudflare_zone.base.id
-  name    = "cf2024-1._domainkey"
-  type    = "TXT"
-  ttl     = 300
-  value   = "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiweykoi+o48IOGuP7GR3X0MOExCUDY/BCRHoWBnh3rChl7WhdyCxW3jgq1daEjPPqoi7sJvdg5hEQVsgVRQP4DcnQDVjGMbASQtrY4WmB1VebF+RPJB2ECPsEDTpeiI5ZyUAwJaVX7r6bznU67g7LvFq35yIo4sdlmtZGV+i0H4cpYH9+3JJ78km4KXwaf9xUJCWF6nxeD+qG6Fyruw1Qlbds2r85U9dkNDVAS3gioCvELryh1TxKGiVTkg4wqHTyHfWsp7KD3WQHYJn0RyfJJu6YEmL77zonn7p2SRMvTMP3ZEXibnC9gz3nnhR6wcYL8Q7zXypKTMD58bTixDSJwIDAQAB"
-}
-
 resource "cloudflare_record" "dmarc_w7it_com_txt" {
   zone_id = cloudflare_zone.base.id
   name    = "_dmarc"
@@ -214,17 +176,6 @@ resource "cloudflare_zone" "old" {
   zone       = local.old_base_domain
 }
 
-resource "cloudflare_record" "orlov-vo_ru_mx" {
-  for_each = local.cloudflare_email_routing_mx_old
-
-  zone_id  = cloudflare_zone.old.id
-  name     = "@"
-  type     = "MX"
-  ttl      = 3600
-  priority = each.value
-  value    = each.key
-}
-
 resource "cloudflare_record" "orlov-vo_ru_a" {
   for_each = {
     for value in local.github_pages_ipv4_addresses : value => value
@@ -257,33 +208,3 @@ resource "cloudflare_record" "orlov-vo_ru_cname" {
   value    = local.old_base_domain
 }
 
-resource "cloudflare_record" "orlov-vo_ru_txt_spf" {
-  zone_id = cloudflare_zone.old.id
-  name    = "@"
-  type    = "TXT"
-  ttl     = 300
-  value   = "v=spf1 include:_spf.mx.cloudflare.net ~all"
-}
-
-resource "cloudflare_email_routing_catch_all" "orlov-vo_ru" {
-  zone_id = cloudflare_zone.old.id
-  name    = "catch-all"
-  enabled = true
-
-  matcher {
-    type = "all"
-  }
-
-  action {
-    type  = "forward"
-    value = ["vlad.it@icloud.com"]
-  }
-}
-
-resource "cloudflare_record" "dkim_orlov-vo_ru_txt" {
-  zone_id = cloudflare_zone.old.id
-  name    = "cf2024-1._domainkey"
-  type    = "TXT"
-  ttl     = 300
-  value   = "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiweykoi+o48IOGuP7GR3X0MOExCUDY/BCRHoWBnh3rChl7WhdyCxW3jgq1daEjPPqoi7sJvdg5hEQVsgVRQP4DcnQDVjGMbASQtrY4WmB1VebF+RPJB2ECPsEDTpeiI5ZyUAwJaVX7r6bznU67g7LvFq35yIo4sdlmtZGV+i0H4cpYH9+3JJ78km4KXwaf9xUJCWF6nxeD+qG6Fyruw1Qlbds2r85U9dkNDVAS3gioCvELryh1TxKGiVTkg4wqHTyHfWsp7KD3WQHYJn0RyfJJu6YEmL77zonn7p2SRMvTMP3ZEXibnC9gz3nnhR6wcYL8Q7zXypKTMD58bTixDSJwIDAQAB"
-}
