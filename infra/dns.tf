@@ -265,6 +265,21 @@ resource "cloudflare_record" "orlov-vo_ru_txt_spf" {
   value   = "v=spf1 include:_spf.mx.cloudflare.net ~all"
 }
 
+resource "cloudflare_email_routing_catch_all" "orlov-vo_ru" {
+  zone_id = cloudflare_zone.old.id
+  name    = "catch-all"
+  enabled = true
+
+  matcher {
+    type = "all"
+  }
+
+  action {
+    type  = "forward"
+    value = ["vlad.it@icloud.com"]
+  }
+}
+
 resource "cloudflare_record" "dkim_orlov-vo_ru_txt" {
   zone_id = cloudflare_zone.old.id
   name    = "cf2024-1._domainkey"
