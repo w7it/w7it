@@ -32,6 +32,12 @@ locals {
     "awstrust.com",
     "amazonaws.com",
   ]
+
+  cloudflare_email_routing_mx = {
+    "route1.mx.cloudflare.net" = 55
+    "route2.mx.cloudflare.net" = 35
+    "route3.mx.cloudflare.net" = 88
+  }
 }
 
 resource "cloudflare_zone" "base" {
@@ -40,12 +46,14 @@ resource "cloudflare_zone" "base" {
 }
 
 resource "cloudflare_record" "w7it_com_mx" {
+  for_each = local.cloudflare_email_routing_mx
+
   zone_id  = cloudflare_zone.base.id
   name     = "@"
   type     = "MX"
   ttl      = 3600
-  priority = 1
-  value    = "smtp.google.com"
+  priority = each.value
+  value    = each.key
 }
 
 resource "cloudflare_record" "w7it_com_a" {
@@ -77,16 +85,9 @@ resource "cloudflare_record" "w7it_com_txt_spf" {
   name    = "@"
   type    = "TXT"
   ttl     = 300
-  value   = "v=spf1 include:_spf.google.com ~all"
+  value   = "v=spf1 include:_spf.mx.cloudflare.net ~all"
 }
 
-resource "cloudflare_record" "w7it_com_txt_google" {
-  zone_id = cloudflare_zone.base.id
-  name    = "@"
-  type    = "TXT"
-  ttl     = 300
-  value   = "google-site-verification=G3yh9Oc7Y8XQaBuVf3AZgnJ2dQnHA6rtSLfKFMhyWKo"
-}
 
 resource "cloudflare_record" "w7it_com_txt_openai" {
   zone_id = cloudflare_zone.base.id
@@ -152,12 +153,12 @@ resource "cloudflare_record" "zergcode_w7it_com_a" {
   value    = "188.245.36.128"
 }
 
-resource "cloudflare_record" "dkim_w7it_com_cname" {
-  zone_id  = cloudflare_zone.base.id
-  name     = "google._domainkey"
-  type     = "TXT"
-  ttl      = 300
-  value    = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApVem0kCZ0nggFbRK++6Au7rtFV6DC0mjmkgip+bSAISEYIkPn2epI7PbtTKOXoSKrcqyS8onF0xiYTk45KnxFbB5icNqWGgbH/BzzTve+qiH9SL+u5Za4cvQ52w6FLKEk7tol2UvyDY/WTIFadb46QIAwDJ5rKp0zro0ulLxIsPPSB9mA0wRAOJmRUpw0Ogz4hSP0cFuulD197/pf98izXyji9LYCSN/pYnzdlY8pBF0vhXSSVgZTNkIbn8a+L++bFa2wODQUVSXTCs0G5unS3kMoAmahcvaQHA4nGKunQixKgkblE3Nx0GG8d469oUHXm7tL1d4eCyo5XFsvsQtiwIDAQAB"
+resource "cloudflare_record" "dkim_w7it_com_txt" {
+  zone_id = cloudflare_zone.base.id
+  name    = "cf2024-1._domainkey"
+  type    = "TXT"
+  ttl     = 300
+  value   = "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiweykoi+o48IOGuP7GR3X0MOExCUDY/BCRHoWBnh3rChl7WhdyCxW3jgq1daEjPPqoi7sJvdg5hEQVsgVRQP4DcnQDVjGMbASQtrY4WmB1VebF+RPJB2ECPsEDTpeiI5ZyUAwJaVX7r6bznU67g7LvFq35yIo4sdlmtZGV+i0H4cpYH9+3JJ78km4KXwaf9xUJCWF6nxeD+qG6Fyruw1Qlbds2r85U9dkNDVAS3gioCvELryh1TxKGiVTkg4wqHTyHfWsp7KD3WQHYJn0RyfJJu6YEmL77zonn7p2SRMvTMP3ZEXibnC9gz3nnhR6wcYL8Q7zXypKTMD58bTixDSJwIDAQAB"
 }
 
 resource "cloudflare_record" "dmarc_w7it_com_txt" {
